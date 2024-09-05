@@ -31,13 +31,23 @@ class Module:
 
     def train(self) -> None:
         """Set the mode of this module and all descendent modules to `train`."""
-        # TODO: Implement for Task 0.4.
-        raise NotImplementedError("Need to implement for Task 0.4")
+
+        def _set_training(module):
+            module.training = True
+            for child in module.modules():
+                _set_training(child)
+        
+        _set_training(self)
 
     def eval(self) -> None:
         """Set the mode of this module and all descendent modules to `eval`."""
-        # TODO: Implement for Task 0.4.
-        raise NotImplementedError("Need to implement for Task 0.4")
+        
+        def _set_eval(module):
+            module.training = False
+            for child in module.modules():
+                _set_eval(child)
+        
+        _set_eval(self)
 
     def named_parameters(self) -> Sequence[Tuple[str, Parameter]]:
         """Collect all the parameters of this module and its descendents.
@@ -47,13 +57,24 @@ class Module:
             The name and `Parameter` of each ancestor parameter.
 
         """
-        # TODO: Implement for Task 0.4.
-        raise NotImplementedError("Need to implement for Task 0.4")
+        # TODO task 0_4
+        # alternative, non-yield version: https://pastebin.com/raw/br9XQ29y
+        def _named_parameters(module, prefix=""):
+            for name, params in module._parameters.items():
+                yield prefix + name, params
+            for name, submodule in module._modules.items():
+                yield from _named_parameters(submodule, prefix + name + ".")
+        return list(_named_parameters(self))
 
     def parameters(self) -> Sequence[Parameter]:
+        # TODO task 0_4
         """Enumerate over all the parameters of this module and its descendents."""
-        # TODO: Implement for Task 0.4.
-        raise NotImplementedError("Need to implement for Task 0.4")
+        def _parameters(module):
+            for params in module._parameters.values():
+                yield params
+            for submodule in module._modules.values():
+                yield from _parameters(submodule)
+        return list(_parameters(self))
 
     def add_parameter(self, k: str, v: Any) -> Parameter:
         """Manually add a parameter. Useful helper for scalar parameters.
