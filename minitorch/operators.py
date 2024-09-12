@@ -129,10 +129,12 @@ def map(fn: Callable[[float], float], iterable: Iterable) -> Iterable:
     """Uses the provided functiona nd iteratively applies to to the iterable.
 
     Args:
+    ----
         fn (Callable[[float], float]): function to apply to each element
         iterable (Iterable): the input iterable to process
 
     Returns:
+    -------
         Iterable: new iterable with the function applied to each element.
 
     """
@@ -148,11 +150,13 @@ def zipWith(
     """Takes two iterables and applies a function to the zip of the two iterables.
 
     Args:
+    ----
         iter1 (Iterable): first iterable to be zipped
         iter2 (Iterable): second iterable to be zipped
         fn (Callable[[float, float], float]): function to be applied to zipped iterables
 
     Returns:
+    -------
         Iterable: result of function applied to zipped iterables
 
     """
@@ -168,11 +172,13 @@ def reduce(
     """Iteratively applies a function to each element of an iterable, starting from an initial value.
 
     Args:
+    ----
         iterable (Iterable): iterable we want to reduce
         fn (Callable[[float, float], float]): function of two arguments which we'll apply to each element
         default (float): initial value used to start the reduction process (e.g. 1 for prod)
 
     Returns:
+    -------
         float: result of reduction
 
     """
@@ -196,9 +202,11 @@ def negList(l: list[float]) -> list[float]:
     """Negates every element of a list.
 
     Args:
+    ----
         l (list[float]): List to be negated.
 
     Returns:
+    -------
         list[float]: Negated list.
 
     """
@@ -209,10 +217,12 @@ def addLists(l1: list, l2: list) -> list:
     """Takes two lists and adds element-wise.
 
     Args:
+    ----
         l1 (list): first list
         l2 (list): second list
 
     Returns:
+    -------
         list: list where each element is element-wise sum of l1 and l2
 
     """
@@ -223,9 +233,11 @@ def sum(l: list[float]) -> float:
     """Sums all elements in a list.
 
     Args:
+    ----
         l (list[float]): list to be summed
 
     Returns:
+    -------
         float: number resulting from summing
 
     """
@@ -236,9 +248,11 @@ def prod(l: list[float]) -> float:
     """Product of all elements in a list.
 
     Args:
+    ----
         l (list[float]): list to be producted
 
     Returns:
+    -------
         float: result of product of all elements in the list
 
     """

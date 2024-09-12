@@ -132,7 +132,6 @@ def test_symmetric(a: float, b: float) -> None:
     assert mul(a, b) == mul(b, a)
 
 
-
 @pytest.mark.task0_2
 @given(small_floats, small_floats, small_floats)
 def test_distribute(a: float, b: float, c: float) -> None:
@@ -144,13 +143,13 @@ def test_distribute(a: float, b: float, c: float) -> None:
 
 @pytest.mark.task0_2
 @given(
-    floats(min_value=-5, max_value=5,allow_nan=False),
-    floats(min_value=-5, max_value=5, allow_nan=False)
+    floats(min_value=-5, max_value=5, allow_nan=False),
+    floats(min_value=-5, max_value=5, allow_nan=False),
 )
 def test_other(a: float, b: float) -> None:
     """Write a test that ensures some other property holds for your functions."""
     # exp(a + b) = exp(a) * exp(b)
-    assert_close(exp(add(a,b)), mul(exp(a), exp(b)))
+    assert_close(exp(add(a, b)), mul(exp(a), exp(b)))
     # exp(-a) = 1/exp(a)
     assert_close(exp(neg(a)), inv(exp(a)))
 
@@ -182,7 +181,7 @@ def test_sum_distribute(ls1: List[float], ls2: List[float]) -> None:
     sum1 = minitorch.operators.sum(ls1)
     sum2 = minitorch.operators.sum(ls2)
     sum_concat = minitorch.operators.sum(ls1 + ls2)
-    assert_close(sum1+sum2, sum_concat)
+    assert_close(sum1 + sum2, sum_concat)
 
 
 @pytest.mark.task0_3
