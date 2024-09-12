@@ -125,8 +125,8 @@ def relu_back(input_val: float, back_grad: float) -> float:
 # - map
 # - zipWith
 # - reduce
-def map(fn: Callable[[float], float], iterable: Iterable) -> Iterable:
-    """Uses the provided functiona nd iteratively applies to to the iterable.
+def map(fn: Callable[[float], float], iterable: Iterable[float]) -> Iterable[float]:
+    """Uses the provided function and iteratively applies to to the iterable.
 
     Args:
     ----
@@ -145,8 +145,8 @@ def map(fn: Callable[[float], float], iterable: Iterable) -> Iterable:
 
 
 def zipWith(
-    iter1: Iterable, iter2: Iterable, fn: Callable[[float, float], float]
-) -> Iterable:
+    iter1: Iterable[float], iter2: Iterable[float], fn: Callable[[float, float], float]
+) -> Iterable[float]:
     """Takes two iterables and applies a function to the zip of the two iterables.
 
     Args:
@@ -167,7 +167,7 @@ def zipWith(
 
 
 def reduce(
-    iterable: Iterable, fn: Callable[[float, float], float], default: float
+    iterable: Iterable[float], fn: Callable[[float, float], float], default: float
 ) -> float:
     """Iteratively applies a function to each element of an iterable, starting from an initial value.
 
@@ -183,7 +183,8 @@ def reduce(
 
     """
     result = default
-    if len(iterable) == 0:
+    if next(iter(iterable), None) is None:
+        # not all iterables have a defined next() function, although python does automatically call iter() at runtime
         return result
     for item in iterable:
         result = fn(item, result)
@@ -210,7 +211,7 @@ def negList(l: list[float]) -> list[float]:
         list[float]: Negated list.
 
     """
-    return map(neg, l)
+    return list(map(neg, l))
 
 
 def addLists(l1: list, l2: list) -> list:
@@ -226,7 +227,7 @@ def addLists(l1: list, l2: list) -> list:
         list: list where each element is element-wise sum of l1 and l2
 
     """
-    return zipWith(l1, l2, add)
+    return list(zipWith(l1, l2, add))
 
 
 def sum(l: list[float]) -> float:

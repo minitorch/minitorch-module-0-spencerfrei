@@ -42,3 +42,5 @@ repos:
   rev: v1.1.376
   hooks:
     - id: pyright
+      args: [--pythonpath, /home/frei/miniconda3/envs/minit/bin/python]
+      additional_dependencies: [pytest, hypothesis]
